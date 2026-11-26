@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Odhy Mahar - Atelier Mahar Eksklusif</title>
+<!-- Tailwind CSS & Google Fonts & Font Awesome -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="script.js"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body class="flex justify-center min-h-screen bg-slate-900 sm:py-6">
+<!-- Mobile Screen Container -->
+<div class="w-full max-w-md bg-canvas min-h-screen relative shadow-2xl overflow-x-hidden flex flex-col pb-20">
+<!-- Top App Bar (Header) -->
+<header class="sticky top-0 z-40 bg-gradient-to-r from-maroon-800 via-maroon-700 to-maroon-900 text-gold-100 px-4 py-3.5 flex items-center justify-between shadow-md">
+<div class="flex items-center space-x-2">
+<div class="w-8 h-8 rounded-full bg-gold-400/20 border border-gold-400/50 flex items-center justify-center text-gold-400">
+<i class="fa-solid fa-gem text-sm"></i>
+</div>
+<div>
+<h1 class="font-serif text-lg font-bold tracking-wide text-white leading-tight">Odhy Mahar</h1>
+<p class="text-[10px] text-gold-400 tracking-wider font-medium uppercase">Atelier Mahar Nusantara</p>
+</div>
+</div>
+<div class="flex items-center space-x-3 text-gold-100">
+<button class="relative p-1.5 hover:text-white transition-colors" onclick="switchTab('tab-admin')" title="Invoice &amp; Pelacakan">
+<i class="fa-regular fa-bell text-lg"></i>
+<span class="absolute top-1 right-1 w-2 h-2 bg-gold-400 rounded-full animate-pulse"></span>
+</button>
+<button class="w-8 h-8 rounded-full bg-maroon-900/80 border border-gold-400/40 flex items-center justify-center text-gold-400 text-xs font-semibold shadow hover:bg-gold-400 hover:text-maroon-900 transition-colors" onclick="handleAdminHeaderClick()" title="Login Admin / Dashboard Pemilik">
+<i class="fa-solid fa-user-shield"></i>
+</button>
+</div>
+</header>
+<!-- CONTENT SECTIONS -->
+<!-- PAGE 1: KATALOG & CEK JADWAL -->
+<main class="page-view flex-1 flex flex-col p-4 space-y-5" id="tab-katalog">
+<!-- Hero Banner -->
+<div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-maroon-800 via-maroon-700 to-maroon-900 text-white p-5 shadow-lg border border-gold-400/30">
+<div class="absolute -right-6 -bottom-6 w-32 h-32 bg-gold-400/10 rounded-full blur-xl pointer-events-none"></div>
+<span class="inline-flex items-center space-x-1.5 text-[11px] font-semibold uppercase tracking-wider text-gold-400 bg-gold-400/10 px-2.5 py-1 rounded-full border border-gold-400/20 mb-2">
+<i class="fa-solid fa-award text-[10px]"></i>
+<span>Atelier Mahar Eksklusif</span>
+</span>
+<h2 class="font-serif text-2xl font-bold leading-snug mb-2 text-white">
+          Keindahan Abadi untuk Hari Bahagia
+        </h2>
+<p class="text-xs text-stone-300 leading-relaxed mb-4">
+          Dirangkai dengan ketulusan, kaligrafi kayu, bunga abadi, &amp; material pilihan asli berkualitas tinggi.
+        </p>
+<div class="flex items-center space-x-3">
+<button class="flex-1 bg-gradient-to-r from-gold-400 to-gold-500 hover:from-gold-500 hover:to-gold-600 text-maroon-900 text-xs font-bold py-2.5 px-3 rounded-xl shadow-md transition-transform active:scale-95 flex items-center justify-center space-x-1.5" onclick="scrollToCatalog()">
+<i class="fa-solid fa-images"></i>
+<span>Lihat 14 Koleksi Asli</span>
+</button>
+<button class="bg-maroon-900/70 border border-gold-400/40 text-gold-100 hover:text-white text-xs font-semibold py-2.5 px-3 rounded-xl transition-all flex items-center space-x-1.5" onclick="switchTab('tab-custom')">
+<i class="fa-solid fa-wand-magic-sparkles text-gold-400"></i>
+<span>Custom</span>
+</button>
+</div>
+</div>
+<!-- Quick Custom Callout -->
+<div class="bg-stone-50 border border-stone-200/80 rounded-2xl p-4 flex items-center justify-between shadow-sm">
+<div>
+<span class="text-[10px] font-bold uppercase tracking-wider text-maroon-700">Bespoke Studio</span>
+<h3 class="text-sm font-bold text-stone-800">Punya Desain Impian Sendiri?</h3>
+<p class="text-[11px] text-stone-500">Unggah foto referensi, tentukan ukuran &amp; ornamen.</p>
+</div>
+<button class="bg-maroon-700 hover:bg-maroon-800 text-gold-100 px-3.5 py-2 rounded-xl text-xs font-bold flex items-center space-x-1.5 shadow active:scale-95 transition-transform" onclick="switchTab('tab-custom')">
+<span>Upload</span>
+<i class="fa-solid fa-arrow-right text-[10px]"></i>
+</button>
+</div>
+<!-- Cek Slot Jadwal Akad Otomatis -->
+<div class="bg-white rounded-2xl p-4 shadow-sm border border-stone-200/90">
+<div class="flex items-center justify-between mb-2.5">
+<div class="flex items-center space-x-2">
+<i class="fa-regular fa-calendar-check text-maroon-700"></i>
+<h3 class="text-xs font-bold uppercase tracking-wider text-stone-800">Cek Jadwal &amp; Slot Pengerjaan</h3>
+</div>
+<span class="text-[10px] font-bold bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full border border-amber-300">Otomatis</span>
+</div>
+<p class="text-[11px] text-stone-500 mb-3">Pilih tanggal akad / target selesai untuk memeriksa kuota antrean atelier:</p>
+<div class="flex space-x-2">
+<input class="flex-1 bg-stone-50 border border-stone-300 rounded-xl px-3 py-2 text-xs font-medium text-stone-800 focus:outline-none focus:ring-2 focus:ring-maroon-700" id="checkDateInput" type="date" value="2026-11-20"/>
+<button class="bg-maroon-700 hover:bg-maroon-800 text-white font-bold text-xs px-4 py-2 rounded-xl active:scale-95 transition" onclick="checkScheduleSlot()">
+            Periksa
+          </button>
+</div>
+<!-- Schedule Status Alert (Dynamic) -->
+<div class="mt-3 p-3 bg-emerald-50 border border-emerald-200 rounded-xl flex items-start space-x-2.5 text-xs text-emerald-800" id="scheduleResultBox">
+<i class="fa-solid fa-circle-check text-emerald-600 mt-0.5"></i>
+<div>
+<p class="font-bold">Slot Pengerjaan Tersedia!</p>
+<p class="text-[11px] text-emerald-700">Estimasi pengerjaan 7-10 hari kerja. Siap dipesan sekarang.</p>
+</div>
+</div>
+</div>
+<!-- Filter Kategori Katalog -->
+<div class="pt-2" id="catalogSection">
+<div class="flex items-center justify-between mb-3">
+<h3 class="font-serif text-base font-bold text-stone-900">14 Koleksi Mahar Asli</h3>
+<span class="text-[11px] font-semibold text-maroon-700 bg-maroon-50 px-2.5 py-0.5 rounded-full">14 Model</span>
+</div>
+<div class="flex space-x-2 overflow-x-auto hide-scrollbar pb-1 text-xs">
+<button class="cat-pill active bg-maroon-700 text-white font-bold px-3 py-1.5 rounded-full shadow-sm whitespace-nowrap" onclick="filterCatalog('all', this)">Semua (14)</button>
+<button class="cat-pill bg-white text-stone-600 border border-stone-200 font-medium px-3 py-1.5 rounded-full whitespace-nowrap" onclick="filterCatalog('akrilik', this)">Akrilik 3D</button>
+<button class="cat-pill bg-white text-stone-600 border border-stone-200 font-medium px-3 py-1.5 rounded-full whitespace-nowrap" onclick="filterCatalog('rustic', this)">Rustic Wood</button>
+<button class="cat-pill bg-white text-stone-600 border border-stone-200 font-medium px-3 py-1.5 rounded-full whitespace-nowrap" onclick="filterCatalog('adat', this)">Adat &amp; Wayang</button>
+</div>
+</div>
+<!-- Daftar 14 Koleksi Mahar (Nama Dihapus, Tampilan Harga Jelas Sesuai WA) -->
+<div class="grid grid-cols-1 gap-4" id="catalogGrid">
+<!-- Item 1: Harga Rp 1.300.000 -->
+<div class="mahar-card akrilik bg-white rounded-2xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-md transition">
+<div class="h-60 bg-stone-100 overflow-hidden relative">
+<img alt="Mahar Koleksi Akrilik Transparan Emas" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAf9utyZmV39LGMq2LaVRg5lVyuKmF8J5me7XfngvgkKDhZsro7X28uO8vwq8AzThGzVr6TjGvYhirGWBDjR0c8ZW28cKZqbxTaMrpCu1oHgMd-lXqc99IhUsCAwtQdr-QO_CgJUX5dVVGLF8I8L-3ZmAq89E6T7nqjl_5KS5zNXt7a_SLpfOE9jPwWWyQLFA0oyvGlXZcwUaE-CaMC4Lem_XtLJHzRU5I6Caj2N6YonzAJPajKyN8"/>
+<span class="absolute top-2.5 left-2.5 bg-maroon-700 text-gold-400 text-[10px] font-bold px-2.5 py-1 rounded-full shadow">Akrilik 3D Transparan</span>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-center mb-1.5">
+<span class="text-xs uppercase tracking-wider font-semibold text-stone-500">Harga Spesial</span>
+<span class="font-serif font-bold text-maroon-700 text-lg">Rp 1.300.000</span>
+</div>
+<p class="text-xs text-stone-600 mb-3 leading-relaxed">Kotak akrilik transparan 3D mewah beraksen bunga anggrek putih &amp; ornamen kipas uang melingkar anggun.</p>
+<button class="w-full bg-gold-400 hover:bg-gold-500 text-maroon-900 font-bold text-xs py-2.5 rounded-xl shadow transition active:scale-98 flex items-center justify-center space-x-2" onclick="selectProduct('Mahar Akrilik Transparan Orkid Gold', 1300000, 'Kotak Akrilik 3D Transparan', 'https://lh3.googleusercontent.com/aida-public/AB6AXuAf9utyZmV39LGMq2LaVRg5lVyuKmF8J5me7XfngvgkKDhZsro7X28uO8vwq8AzThGzVr6TjGvYhirGWBDjR0c8ZW28cKZqbxTaMrpCu1oHgMd-lXqc99IhUsCAwtQdr-QO_CgJUX5dVVGLF8I8L-3ZmAq89E6T7nqjl_5KS5zNXt7a_SLpfOE9jPwWWyQLFA0oyvGlXZcwUaE-CaMC4Lem_XtLJHzRU5I6Caj2N6YonzAJPajKyN8')">
+<i class="fa-solid fa-cart-shopping"></i>
+<span>Pilih &amp; Pesan Desain Ini</span>
+</button>
+</div>
+</div>
+<!-- Item 2: Harga Rp 650.000 -->
+<div class="mahar-card rustic bg-white rounded-2xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-md transition">
+<div class="h-60 bg-stone-100 overflow-hidden relative">
+<img alt="Mahar Koleksi Rustic Wood Buku Nikah" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyPXrdFXg7KKW37nqCAWMNsO-Fgobnyw_gIqGLAxBG0g8zIcxU1Y9EfBmGfBWHe2eRbzvE5iBwq_RXDaeIcMG0EUfZkWFMzcOhj2ApKiUcnJxYwiSaJiOxkKu3Zgmwe6CEYMrPkFCDfsJkLeisQyv16BYaDf6400556bJJBLmVTVQmAynh3uKAs9j4F27HEuTtYftBsrxbLVNgqJ3dpOj15BJ3Xkdsa_QQNChLbTdJOU0yKLgGCsk"/>
+<span class="absolute top-2.5 left-2.5 bg-amber-800 text-amber-100 text-[10px] font-bold px-2.5 py-1 rounded-full shadow">Rustic Wood</span>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-center mb-1.5">
+<span class="text-xs uppercase tracking-wider font-semibold text-stone-500">Harga Spesial</span>
+<span class="font-serif font-bold text-maroon-700 text-lg">Rp 650.000</span>
+</div>
+<p class="text-xs text-stone-600 mb-3 leading-relaxed">Bingkai kayu pinus natural serat lembut dengan hiasan replika buku nikah, sertifikat, &amp; bunga pink lembut.</p>
+<button class="w-full bg-gold-400 hover:bg-gold-500 text-maroon-900 font-bold text-xs py-2.5 rounded-xl shadow transition active:scale-98 flex items-center justify-center space-x-2" onclick="selectProduct('Mahar Rustic Wood Buku Nikah Pink', 650000, 'Rustic Wood Pinus', 'https://lh3.googleusercontent.com/aida-public/AB6AXuCyPXrdFXg7KKW37nqCAWMNsO-Fgobnyw_gIqGLAxBG0g8zIcxU1Y9EfBmGfBWHe2eRbzvE5iBwq_RXDaeIcMG0EUfZkWFMzcOhj2ApKiUcnJxYwiSaJiOxkKu3Zgmwe6CEYMrPkFCDfsJkLeisQyv16BYaDf6400556bJJBLmVTVQmAynh3uKAs9j4F27HEuTtYftBsrxbLVNgqJ3dpOj15BJ3Xkdsa_QQNChLbTdJOU0yKLgGCsk')">
+<i class="fa-solid fa-cart-shopping"></i>
+<span>Pilih &amp; Pesan Desain Ini</span>
+</button>
+</div>
+</div>
+<!-- Item 3: Harga Rp 1.200.000 -->
+<div class="mahar-card rustic bg-white rounded-2xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-md transition">
+<div class="h-60 bg-stone-100 overflow-hidden relative">
+<img alt="Mahar Koleksi Bulat Plat Kayu Burgundy" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeSAiBO1QPUymBi7yuddqadrnWxeHpJXdsvkDM5_r8HATvu0uTxcl_3U3S99pgX8vvLRCfCIxwRtOG46phYc7Mt-4m2y25CkfZGPLXmTvpue6wwx_NliEfjB-jHSXI9TG_kC9O0UqNatgzJ0pNjv6wQfNK0a3Pf2HJTMWVgzMGCaUAatR7xrxUjNCAWOP4-Az-TaTfWsPjcuUJ9sGPQ4X-nanjTLyK1zFXg-Zcezi4GpYZS0PurS0"/>
+<span class="absolute top-2.5 left-2.5 bg-maroon-900 text-gold-300 text-[10px] font-bold px-2.5 py-1 rounded-full shadow">Bespoke Circular</span>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-center mb-1.5">
+<span class="text-xs uppercase tracking-wider font-semibold text-stone-500">Harga Spesial</span>
+<span class="font-serif font-bold text-maroon-700 text-lg">Rp 1.200.000</span>
+</div>
+<p class="text-xs text-stone-600 mb-3 leading-relaxed">Sentuhan plat kayu bulat lingkar dengan ornamen logo kebanggaan, formasi uang gulung &amp; orkid burgundy.</p>
+<button class="w-full bg-gold-400 hover:bg-gold-500 text-maroon-900 font-bold text-xs py-2.5 rounded-xl shadow transition active:scale-98 flex items-center justify-center space-x-2" onclick="selectProduct('Mahar Plat Bulat Woodcraft Burgundy', 1200000, 'Rustic Modern Hexa/Circle', 'https://lh3.googleusercontent.com/aida-public/AB6AXuDeSAiBO1QPUymBi7yuddqadrnWxeHpJXdsvkDM5_r8HATvu0uTxcl_3U3S99pgX8vvLRCfCIxwRtOG46phYc7Mt-4m2y25CkfZGPLXmTvpue6wwx_NliEfjB-jHSXI9TG_kC9O0UqNatgzJ0pNjv6wQfNK0a3Pf2HJTMWVgzMGCaUAatR7xrxUjNCAWOP4-Az-TaTfWsPjcuUJ9sGPQ4X-nanjTLyK1zFXg-Zcezi4GpYZS0PurS0')">
+<i class="fa-solid fa-cart-shopping"></i>
+<span>Pilih &amp; Pesan Desain Ini</span>
+</button>
+</div>
+</div>
+<!-- Item 4: Harga Rp 950.000 -->
+<div class="mahar-card adat bg-white rounded-2xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-md transition">
+<div class="h-60 bg-stone-100 overflow-hidden relative">
+<img alt="Mahar Koleksi Gunungan Rumah Adat" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDELLZrUrw8mh-oWHuoC-CEwcBCIzU2bHT3G1n61Kdq0cGelyTqX21h7DhNSPFRSC5pq3QYdoqFFqH6A2EKXdSm-3oCSQt67Ct7P536JmnTDL4gDVstHtvlhPBwC7auis-lE0sQ2IIlKMW4Tzpylb6nt2mZe8uJa6HC3dYlqIVOZLGYp4xLLN-ktp-vqXHrA1UxON2Ag6MM88ZXELktmr1vVQhZFun24QYY4p18TcamidfS74NvOrA"/>
+<span class="absolute top-2.5 left-2.5 bg-amber-700 text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow">Adat &amp; Gunungan</span>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-center mb-1.5">
+<span class="text-xs uppercase tracking-wider font-semibold text-stone-500">Harga Spesial</span>
+<span class="font-serif font-bold text-maroon-700 text-lg">Rp 950.000</span>
+</div>
+<p class="text-xs text-stone-600 mb-3 leading-relaxed">Bingkai kayu bentuk gunungan wayang &amp; rumah adat berhias sepasang boneka pengantin adat nusantara.</p>
+<button class="w-full bg-gold-400 hover:bg-gold-500 text-maroon-900 font-bold text-xs py-2.5 rounded-xl shadow transition active:scale-98 flex items-center justify-center space-x-2" onclick="selectProduct('Mahar Gunungan Rumah Adat Nusantara', 950000, 'Bingkai Kayu Gunungan Adat', 'https://lh3.googleusercontent.com/aida-public/AB6AXuDELLZrUrw8mh-oWHuoC-CEwcBCIzU2bHT3G1n61Kdq0cGelyTqX21h7DhNSPFRSC5pq3QYdoqFFqH6A2EKXdSm-3oCSQt67Ct7P536JmnTDL4gDVstHtvlhPBwC7auis-lE0sQ2IIlKMW4Tzpylb6nt2mZe8uJa6HC3dYlqIVOZLGYp4xLLN-ktp-vqXHrA1UxON2Ag6MM88ZXELktmr1vVQhZFun24QYY4p18TcamidfS74NvOrA')">
+<i class="fa-solid fa-cart-shopping"></i>
+<span>Pilih &amp; Pesan Desain Ini</span>
+</button>
+</div>
+</div>
+<!-- Item 5: Harga Rp 700.000 -->
+<div class="mahar-card rustic bg-white rounded-2xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-md transition">
+<div class="h-60 bg-stone-100 overflow-hidden relative">
+<img alt="Mahar Koleksi Frame Putih Klasik Uang Biru" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1Vh7VR12G7xGC8xknUymXqQZoZ9zQxJTuEKO56Hcs2UGnRLtPZdTyvrJ7asNPEIWPfEkAzt2E3h-EQkQrzot6TgQgW0nk5gAGGy_MWlLmfOdJgj6UJ3Vc0dQOb5OoZYxHtsvIdkMnxVLzDxsUdKq4HAJ9xQQqvkWJMpCblq2_Lck4Bj3t7MBoo-Opdm3TkbOMrir80Dgz2Tvo3i52oY838aWQ_jSP2B5bq35eYlsnLwpJEAsaVoc"/>
+<span class="absolute top-2.5 left-2.5 bg-blue-800 text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow">Klasik Putih</span>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-center mb-1.5">
+<span class="text-xs uppercase tracking-wider font-semibold text-stone-500">Harga Spesial</span>
+<span class="font-serif font-bold text-maroon-700 text-lg">Rp 700.000</span>
+</div>
+<p class="text-xs text-stone-600 mb-3 leading-relaxed">Formasi lembaran rupiah bertingkat rapi dipadu sudut ukir emas klasik dan aksen bunga orkid biru.</p>
+<button class="w-full bg-gold-400 hover:bg-gold-500 text-maroon-900 font-bold text-xs py-2.5 rounded-xl shadow transition active:scale-98 flex items-center justify-center space-x-2" onclick="selectProduct('Mahar Frame Putih Tingkat Uang Biru', 700000, 'Frame Klasik Putih Ukir', 'https://lh3.googleusercontent.com/aida-public/AB6AXuD1Vh7VR12G7xGC8xknUymXqQZoZ9zQxJTuEKO56Hcs2UGnRLtPZdTyvrJ7asNPEIWPfEkAzt2E3h-EQkQrzot6TgQgW0nk5gAGGy_MWlLmfOdJgj6UJ3Vc0dQOb5OoZYxHtsvIdkMnxVLzDxsUdKq4HAJ9xQQqvkWJMpCblq2_Lck4Bj3t7MBoo-Opdm3TkbOMrir80Dgz2Tvo3i52oY838aWQ_jSP2B5bq35eYlsnLwpJEAsaVoc')">
+<i class="fa-solid fa-cart-shopping"></i>
+<span>Pilih &amp; Pesan Desain Ini</span>
+</button>
+</div>
+</div>
+<!-- Item 6: Harga Rp 1.200.000 -->
+<div class="mahar-card akrilik bg-white rounded-2xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-md transition">
+<div class="h-60 bg-stone-100 overflow-hidden relative">
+<img alt="Mahar Koleksi Luxury Black Burgundy" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5HN-qDDAW2CbB_DITsEbJd4DPq8y2cP1KdSxn8NfSeuG_sVwiMGkHmaQ37j4dsmeA-3IjnvTE9iKyQdAaE6GKz1I88-BNlnDljGmallSgIWX31ZcShwnUBln58bkPNrnRqusQfd0ttDej5hmLosRAf9ORR-TGOonODyt3n8kJYk195-WNyWF1WMdfKD7DCVLUu6wl8sJP1k_Jt6HvBCXtslZvKkzQwomR3uI-D9Ybhv5nFzzd9cw"/>
+<span class="absolute top-2.5 left-2.5 bg-stone-900 text-gold-400 text-[10px] font-bold px-2.5 py-1 rounded-full shadow">Luxury Black Glossy</span>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-center mb-1.5">
+<span class="text-xs uppercase tracking-wider font-semibold text-stone-500">Harga Spesial</span>
+<span class="font-serif font-bold text-maroon-700 text-lg">Rp 1.200.000</span>
+</div>
+<p class="text-xs text-stone-600 mb-3 leading-relaxed">Akrilik hitam glossy premium dengan rangkaian bunga calla lily merah menyala, kalung &amp; replika logam mulia.</p>
+<button class="w-full bg-gold-400 hover:bg-gold-500 text-maroon-900 font-bold text-xs py-2.5 rounded-xl shadow transition active:scale-98 flex items-center justify-center space-x-2" onclick="selectProduct('Mahar Luxury Black Acrylic Calla Lily', 1200000, 'Luxury Black Acrylic', 'https://lh3.googleusercontent.com/aida-public/AB6AXuC5HN-qDDAW2CbB_DITsEbJd4DPq8y2cP1KdSxn8NfSeuG_sVwiMGkHmaQ37j4dsmeA-3IjnvTE9iKyQdAaE6GKz1I88-BNlnDljGmallSgIWX31ZcShwnUBln58bkPNrnRqusQfd0ttDej5hmLosRAf9ORR-TGOonODyt3n8kJYk195-WNyWF1WMdfKD7DCVLUu6wl8sJP1k_Jt6HvBCXtslZvKkzQwomR3uI-D9Ybhv5nFzzd9cw')">
+<i class="fa-solid fa-cart-shopping"></i>
+<span>Pilih &amp; Pesan Desain Ini</span>
+</button>
+</div>
+</div>
+<!-- Item 7: Harga Rp 1.300.000 -->
+<div class="mahar-card akrilik bg-white rounded-2xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-md transition">
+<div class="h-60 bg-stone-100 overflow-hidden relative">
+<img alt="Mahar Koleksi Valas Dollar USD &amp; LM" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYYvs1F3p63SweSmnM6kV2lF1s4iiwj-zz9Yccx9zRaED7WTUqkAAWiYrGIML3lh57e3ZhIDdGcxTPP3vELeTrhRyzvflnYENHGoo3yr1BQa9w7sJCuqvXN8xwbNEtwGpkarSO9CaoEDcSlDnW6PJPBgWbQ0NQf0r4iY9viCWRT_5TP-pUcSwCGGuihMoP-y4reJJvJPNYuwH1hzhItSMgInRtoFrD2MhlEGG7UaBUfn9r_Snx64g"/>
+<span class="absolute top-2.5 left-2.5 bg-emerald-800 text-emerald-100 text-[10px] font-bold px-2.5 py-1 rounded-full shadow">Valas &amp; Logam Mulia</span>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-center mb-1.5">
+<span class="text-xs uppercase tracking-wider font-semibold text-stone-500">Harga Spesial</span>
+<span class="font-serif font-bold text-maroon-700 text-lg">Rp 1.300.000</span>
+</div>
+<p class="text-xs text-stone-600 mb-3 leading-relaxed">Formasi lembaran valuta asing Dollar Amerika (USD), logam mulia, anthurium gradasi &amp; anggrek premium.</p>
+<button class="w-full bg-gold-400 hover:bg-gold-500 text-maroon-900 font-bold text-xs py-2.5 rounded-xl shadow transition active:scale-98 flex items-center justify-center space-x-2" onclick="selectProduct('Mahar Valas Dollar USD &amp; Logam Mulia', 1300000, 'Stand Akrilik Valas USD', 'https://lh3.googleusercontent.com/aida-public/AB6AXuDYYvs1F3p63SweSmnM6kV2lF1s4iiwj-zz9Yccx9zRaED7WTUqkAAWiYrGIML3lh57e3ZhIDdGcxTPP3vELeTrhRyzvflnYENHGoo3yr1BQa9w7sJCuqvXN8xwbNEtwGpkarSO9CaoEDcSlDnW6PJPBgWbQ0NQf0r4iY9viCWRT_5TP-pUcSwCGGuihMoP-y4reJJvJPNYuwH1hzhItSMgInRtoFrD2MhlEGG7UaBUfn9r_Snx64g')">
+<i class="fa-solid fa-cart-shopping"></i>
+<span>Pilih &amp; Pesan Desain Ini</span>
+</button>
+</div>
+</div>
+<!-- Item 8: Harga Rp 750.000 -->
+<div class="mahar-card akrilik bg-white rounded-2xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-md transition">
+<div class="h-60 bg-stone-100 overflow-hidden relative">
+<img alt="Mahar Koleksi Kubah Kayu Bunga Marun" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrEUU54URwRvEFAcgYu_hhZ1FX3DQzHuRFC3JPX38P_UYb50a3kx_V_7mBHJRmb86aEZOOeSD6mjWQzmMAg54Bk7QdiMKjhkDDfiPchLCN6ivEJn7greeDuYrZNtrPmZILO9H-7ZYAGzNrbdb5TFjIxukTeIiKuF58OJlWCOXGqI0ivoER4MckTyhfzN77bnTFriL0N4lwvehf9AGtHyuSTx-g-n1w5aNpyqgtu554JlOuf7Ng87g"/>
+<span class="absolute top-2.5 left-2.5 bg-maroon-700 text-gold-400 text-[10px] font-bold px-2.5 py-1 rounded-full shadow">Best Seller</span>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-center mb-1.5">
+<span class="text-xs uppercase tracking-wider font-semibold text-stone-500">Harga Spesial</span>
+<span class="font-serif font-bold text-maroon-700 text-lg">Rp 750.000</span>
+</div>
+<p class="text-xs text-stone-600 mb-3 leading-relaxed">Kubah kayu lengkung, rona bunga mawar marun burgundy, gulungan uang &amp; koin replika emas mulia.</p>
+<button class="w-full bg-gold-400 hover:bg-gold-500 text-maroon-900 font-bold text-xs py-2.5 rounded-xl shadow transition active:scale-98 flex items-center justify-center space-x-2" onclick="selectProduct('Mahar Kubah Lengkung Mawar Marun', 750000, 'Akrilik 3D Shadow Box', 'https://lh3.googleusercontent.com/aida-public/AB6AXuDrEUU54URwRvEFAcgYu_hhZ1FX3DQzHuRFC3JPX38P_UYb50a3kx_V_7mBHJRmb86aEZOOeSD6mjWQzmMAg54Bk7QdiMKjhkDDfiPchLCN6ivEJn7greeDuYrZNtrPmZILO9H-7ZYAGzNrbdb5TFjIxukTeIiKuF58OJlWCOXGqI0ivoER4MckTyhfzN77bnTFriL0N4lwvehf9AGtHyuSTx-g-n1w5aNpyqgtu554JlOuf7Ng87g')">
+<i class="fa-solid fa-cart-shopping"></i>
+<span>Pilih &amp; Pesan Desain Ini</span>
+</button>
+</div>
+</div>
+<!-- Item 9: Harga Rp 850.000 -->
+<div class="mahar-card akrilik bg-white rounded-2xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-md transition">
+<div class="h-60 bg-stone-100 overflow-hidden relative">
+<img alt="Mahar Koleksi Bingkai 3D Putih Kubah Kayu" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3zDFCm-NxZ3KuA4VBJyOz8wcIhaONJv-XX5SOyhnylQtkIU35czNnZ4uTDAc0HJRWdx7knwgdd420W9N3u-0cXB4f3PVtUWzlObldwSfXFFlvGXaGpQNDeKVYy6-nY9JCbU5kqJtKyafg-pbtKD5xt5VBdCi8tReH9n6pS_-XiTc02euzY8XAaCA4PovfMHA7HJPgQvtVwX9OaEw6Fpa1PYoCKrICvwnza8AYDiqi2lcUY8VKrFE"/>
+<span class="absolute top-2.5 left-2.5 bg-maroon-800 text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow">Minimalis Elegan</span>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-center mb-1.5">
+<span class="text-xs uppercase tracking-wider font-semibold text-stone-500">Harga Spesial</span>
+<span class="font-serif font-bold text-maroon-700 text-lg">Rp 850.000</span>
+</div>
+<p class="text-xs text-stone-600 mb-3 leading-relaxed">Bingkai 3D putih minimalis dipadu bunga merah marun, kaligrafi kayu kubah, uang gulung &amp; buku nikah.</p>
+<button class="w-full bg-gold-400 hover:bg-gold-500 text-maroon-900 font-bold text-xs py-2.5 rounded-xl shadow transition active:scale-98 flex items-center justify-center space-x-2" onclick="selectProduct('Mahar Kubah Bunga Merah Frame Putih', 850000, 'Bingkai 3D Putih Minimalis', 'https://lh3.googleusercontent.com/aida-public/AB6AXuC3zDFCm-NxZ3KuA4VBJyOz8wcIhaONJv-XX5SOyhnylQtkIU35czNnZ4uTDAc0HJRWdx7knwgdd420W9N3u-0cXB4f3PVtUWzlObldwSfXFFlvGXaGpQNDeKVYy6-nY9JCbU5kqJtKyafg-pbtKD5xt5VBdCi8tReH9n6pS_-XiTc02euzY8XAaCA4PovfMHA7HJPgQvtVwX9OaEw6Fpa1PYoCKrICvwnza8AYDiqi2lcUY8VKrFE')">
+<i class="fa-solid fa-cart-shopping"></i>
+<span>Pilih &amp; Pesan Desain Ini</span>
+</button>
+</div>
+</div>
+<!-- Item 10: Harga Rp 1.200.000 -->
+<div class="mahar-card akrilik bg-white rounded-2xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-md transition">
+<div class="h-60 bg-stone-100 overflow-hidden relative">
+<img alt="Mahar Koleksi Euro &amp; Menara Eiffel" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZcSZU9-Wv6hZg9P0M5PK01z5MQo1AfBO_Aka6I8ppIj5z3A5NZT6iJewFwyuCPKafDaha0wLTsvQXvNU7fzH2IWv8zUWr7mLRx4RLvMltE5Eb2ztxrNP62iCJXeuaapvoKTefJL2Js85UhWqIIOysUWkgXq9mtdMUZJmEJwTzzJPSFfowlB4-5AxQ6oUHg2zdbTnpqpF65P0b1WE8SYjir-NPGbp2a2mFG9UqdImpyW_KKeWsqmw"/>
+<span class="absolute top-2.5 left-2.5 bg-blue-900 text-gold-300 text-[10px] font-bold px-2.5 py-1 rounded-full shadow">Eropa Romantis</span>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-center mb-1.5">
+<span class="text-xs uppercase tracking-wider font-semibold text-stone-500">Harga Spesial</span>
+<span class="font-serif font-bold text-maroon-700 text-lg">Rp 1.200.000</span>
+</div>
+<p class="text-xs text-stone-600 mb-3 leading-relaxed">Nuansa romantic international dengan lembaran 400 Euro, miniatur menara Eiffel, dan anggrek biru.</p>
+<button class="w-full bg-gold-400 hover:bg-gold-500 text-maroon-900 font-bold text-xs py-2.5 rounded-xl shadow transition active:scale-98 flex items-center justify-center space-x-2" onclick="selectProduct('Mahar Akrilik Valas Euro Menara Eiffel', 1200000, 'Akrilik Internasional 400 Euro', 'https://lh3.googleusercontent.com/aida-public/AB6AXuBZcSZU9-Wv6hZg9P0M5PK01z5MQo1AfBO_Aka6I8ppIj5z3A5NZT6iJewFwyuCPKafDaha0wLTsvQXvNU7fzH2IWv8zUWr7mLRx4RLvMltE5Eb2ztxrNP62iCJXeuaapvoKTefJL2Js85UhWqIIOysUWkgXq9mtdMUZJmEJwTzzJPSFfowlB4-5AxQ6oUHg2zdbTnpqpF65P0b1WE8SYjir-NPGbp2a2mFG9UqdImpyW_KKeWsqmw')">
+<i class="fa-solid fa-cart-shopping"></i>
+<span>Pilih &amp; Pesan Desain Ini</span>
+</button>
+</div>
+</div>
+<!-- Item 11: Harga Rp 800.000 -->
+<div class="mahar-card rustic bg-white rounded-2xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-md transition">
+<div class="h-60 bg-stone-100 overflow-hidden relative">
+<img alt="Mahar Koleksi Kipas Uang Tosca" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDn272QWWwmhm_KRVbamyy9zDMWjR1kSMW6l5xktx1ZdLt0oZuGNDkyEDuivIEPxtM2u6E7JS4LQLcuwUYPdENY3wHJqvY8KPYw3_-DPcqo9_fvYeRlzgCayrWrInuzCms8zIc61wfD_bqnNboK4Nt7Z41q-Qy-cmdIlxv6ylYSo2PM8ceZcg6R6-56bH9q35r0by9dWpjf_Nqp6lJSluifA7oxCT95N__LleCc8JLjdqtFD9mu4D0"/>
+<span class="absolute top-2.5 left-2.5 bg-teal-800 text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow">Kipas Tosca</span>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-center mb-1.5">
+<span class="text-xs uppercase tracking-wider font-semibold text-stone-500">Harga Spesial</span>
+<span class="font-serif font-bold text-maroon-700 text-lg">Rp 800.000</span>
+</div>
+<p class="text-xs text-stone-600 mb-3 leading-relaxed">Formasi kipas uang biru tosca melingkar anggun dengan bunga senada dan sudut ukir klasik warna emas.</p>
+<button class="w-full bg-gold-400 hover:bg-gold-500 text-maroon-900 font-bold text-xs py-2.5 rounded-xl shadow transition active:scale-98 flex items-center justify-center space-x-2" onclick="selectProduct('Mahar Frame Putih Kipas Uang Tosca', 800000, 'Frame Putih Kipas Cantik', 'https://lh3.googleusercontent.com/aida-public/AB6AXuDn272QWWwmhm_KRVbamyy9zDMWjR1kSMW6l5xktx1ZdLt0oZuGNDkyEDuivIEPxtM2u6E7JS4LQLcuwUYPdENY3wHJqvY8KPYw3_-DPcqo9_fvYeRlzgCayrWrInuzCms8zIc61wfD_bqnNboK4Nt7Z41q-Qy-cmdIlxv6ylYSo2PM8ceZcg6R6-56bH9q35r0by9dWpjf_Nqp6lJSluifA7oxCT95N__LleCc8JLjdqtFD9mu4D0')">
+<i class="fa-solid fa-cart-shopping"></i>
+<span>Pilih &amp; Pesan Desain Ini</span>
+</button>
+</div>
+</div>
+<!-- Item 12: Harga Rp 850.000 -->
+<div class="mahar-card akrilik bg-white rounded-2xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-md transition">
+<div class="h-60 bg-stone-100 overflow-hidden relative">
+<img alt="Mahar Koleksi Bulat Putih Kipas Melingkar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhdGvu-mezQhDezwywc9KJbTYLkCtlXs-wk5hyDClk1_wAkgGiskkvwDO8fGYKQo8l4G4yoVpAIOgCEHKALwaVQOGo-twyYQwahSYhy9YJPSzeKxniMCkNkbKtw14tPQUYlHN3PrcTqctaDHpcS6Q7BKto9iJQDBi5jwZBsGHxcLmiaa780xAjexf0-xmx_mZkBje6xdjAEOBVr0HQOcQLfWvMKg64pE9xAxF4VGnMX4c40ixrQ3I"/>
+<span class="absolute top-2.5 left-2.5 bg-amber-600 text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow">Bulat Emas Mewah</span>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-center mb-1.5">
+<span class="text-xs uppercase tracking-wider font-semibold text-stone-500">Harga Spesial</span>
+<span class="font-serif font-bold text-maroon-700 text-lg">Rp 850.000</span>
+</div>
+<p class="text-xs text-stone-600 mb-3 leading-relaxed">Plat bulat putih dengan kaligrafi gold mewah, bunga mawar kuning cerah &amp; susunan uang melingkar presisi.</p>
+<button class="w-full bg-gold-400 hover:bg-gold-500 text-maroon-900 font-bold text-xs py-2.5 rounded-xl shadow transition active:scale-98 flex items-center justify-center space-x-2" onclick="selectProduct('Mahar Bulat Putih Kipas Melingkar Gold', 850000, 'Frame Klasik Bulat Gold', 'https://lh3.googleusercontent.com/aida-public/AB6AXuAhdGvu-mezQhDezwywc9KJbTYLkCtlXs-wk5hyDClk1_wAkgGiskkvwDO8fGYKQo8l4G4yoVpAIOgCEHKALwaVQOGo-twyYQwahSYhy9YJPSzeKxniMCkNkbKtw14tPQUYlHN3PrcTqctaDHpcS6Q7BKto9iJQDBi5jwZBsGHxcLmiaa780xAjexf0-xmx_mZkBje6xdjAEOBVr0HQOcQLfWvMKg64pE9xAxF4VGnMX4c40ixrQ3I')">
+<i class="fa-solid fa-cart-shopping"></i>
+<span>Pilih &amp; Pesan Desain Ini</span>
+</button>
+</div>
+</div>
+<!-- Item 13: Harga Rp 900.000 -->
+<div class="mahar-card rustic bg-white rounded-2xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-md transition">
+<div class="h-60 bg-stone-100 overflow-hidden relative">
+<img alt="Mahar Koleksi LED Glow Kipas Melingkar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5_UOGMk3JWYhgBlFd_wDazbrEriA8g2ztNhVBrB6vgbxRVhLR13x5i5LbK2k1syHCf_LFERlklhVrvs2a271JETDAgI3BXyVRt57cmk0h0siQbXU0OV3u7Vof9JulU96ExSFyrEFLWsguIxM-lQDJhksu8YOZtvJvb_x1sZVpgU1LplCrSbDPhhCFHclmxlfOriwGz2R_rd_17D41M5zjR-XftbfitObjWMDnL9lpyOBlV2loeDc"/>
+<span class="absolute top-2.5 left-2.5 bg-indigo-900 text-gold-300 text-[10px] font-bold px-2.5 py-1 rounded-full shadow">LED Glow Series</span>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-center mb-1.5">
+<span class="text-xs uppercase tracking-wider font-semibold text-stone-500">Harga Spesial</span>
+<span class="font-serif font-bold text-maroon-700 text-lg">Rp 900.000</span>
+</div>
+<p class="text-xs text-stone-600 mb-3 leading-relaxed">Dilengkapi instalasi lampu LED warm glow menawan, kipas uang spiral, dan tempat perhiasan mahar.</p>
+<button class="w-full bg-gold-400 hover:bg-gold-500 text-maroon-900 font-bold text-xs py-2.5 rounded-xl shadow transition active:scale-98 flex items-center justify-center space-x-2" onclick="selectProduct('Mahar Kipas Melingkar LED Warm Glow', 900000, 'Rustic LED Warm Series', 'https://lh3.googleusercontent.com/aida-public/AB6AXuB5_UOGMk3JWYhgBlFd_wDazbrEriA8g2ztNhVBrB6vgbxRVhLR13x5i5LbK2k1syHCf_LFERlklhVrvs2a271JETDAgI3BXyVRt57cmk0h0siQbXU0OV3u7Vof9JulU96ExSFyrEFLWsguIxM-lQDJhksu8YOZtvJvb_x1sZVpgU1LplCrSbDPhhCFHclmxlfOriwGz2R_rd_17D41M5zjR-XftbfitObjWMDnL9lpyOBlV2loeDc')">
+<i class="fa-solid fa-cart-shopping"></i>
+<span>Pilih &amp; Pesan Desain Ini</span>
+</button>
+</div>
+</div>
+<!-- Item 14: Harga Rp 950.000 -->
+<div class="mahar-card akrilik bg-white rounded-2xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-md transition">
+<div class="h-60 bg-stone-100 overflow-hidden relative">
+<img alt="Mahar Koleksi Kedinasan Matra Laut" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1ffZgl7lW0MwFt3l8cQouR8nS5COBXsSB_UtQTNaVtATMqGmLJXujC48k3DRL7UecNyFNSgqpbi2PzU-M2rD2bzhJ9cSbkarn1_oqJLU_qSy57s8P5ZGfxq4-W4_yPHPNXJKy2OyaplQzkHTtYr7jyVsXdv0ekcxV9sitAMd9tjP3SbL-hFNHzczGIXoMvtsJR5vSqa-NrRlnUrhtOk9Mgop6W5tZiSNz184dyWwq25ebZmtyCOk"/>
+<span class="absolute top-2.5 left-2.5 bg-sky-900 text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow">Kedinasan Matra Laut</span>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-center mb-1.5">
+<span class="text-xs uppercase tracking-wider font-semibold text-stone-500">Harga Spesial</span>
+<span class="font-serif font-bold text-maroon-700 text-lg">Rp 950.000</span>
+</div>
+<p class="text-xs text-stone-600 mb-3 leading-relaxed">Tema Ocean Blue matra laut, lencana korps resmi kebanggaan, replika koin perak &amp; kalung perhiasan.</p>
+<button class="w-full bg-gold-400 hover:bg-gold-500 text-maroon-900 font-bold text-xs py-2.5 rounded-xl shadow transition active:scale-98 flex items-center justify-center space-x-2" onclick="selectProduct('Mahar Akrilik Kedinasan Matra Laut Ocean Blue', 950000, 'Akrilik Kedinasan Matra Laut', 'https://lh3.googleusercontent.com/aida-public/AB6AXuB1ffZgl7lW0MwFt3l8cQouR8nS5COBXsSB_UtQTNaVtATMqGmLJXujC48k3DRL7UecNyFNSgqpbi2PzU-M2rD2bzhJ9cSbkarn1_oqJLU_qSy57s8P5ZGfxq4-W4_yPHPNXJKy2OyaplQzkHTtYr7jyVsXdv0ekcxV9sitAMd9tjP3SbL-hFNHzczGIXoMvtsJR5vSqa-NrRlnUrhtOk9Mgop6W5tZiSNz184dyWwq25ebZmtyCOk')">
+<i class="fa-solid fa-cart-shopping"></i>
+<span>Pilih &amp; Pesan Desain Ini</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- PAGE 2: REQUEST DESAIN MAHAR SENDIRI (DENGAN FITUR UNGGAH GAMBAR REFERENSI) -->
+<main class="page-view hidden flex-1 flex flex-col p-4 space-y-4" id="tab-custom">
+<div class="border-b border-stone-200 pb-3">
+<span class="text-[10px] font-bold uppercase tracking-wider text-maroon-700">Studio Bespoke</span>
+<h2 class="font-serif text-xl font-bold text-stone-900">Request Desain Mahar Impian</h2>
+<p class="text-xs text-stone-500">Unggah foto desain yang diinginkan &amp; tentukan kustomisasi bingkai Anda.</p>
+</div>
+<div class="space-y-4 text-xs">
+<!-- FITUR UNGGAH GAMBAR REFERENSI DESAIN -->
+<div class="bg-white border-2 border-dashed border-maroon-700/40 rounded-2xl p-4 text-center">
+<label class="block font-bold text-stone-800 text-xs mb-1.5">
+<i class="fa-solid fa-cloud-arrow-up text-maroon-700 mr-1"></i>
+            Unggah Contoh Foto Desain Mahar Impian Anda
+          </label>
+<p class="text-[11px] text-stone-500 mb-3">Punya foto referensi dari Pinterest, Instagram, atau sketsa sendiri? Unggah di sini:</p>
+<!-- Input File Interaktif -->
+<input accept="image/*" class="hidden" id="customImageInput" onchange="previewUploadedCustomImage(event)" type="file"/>
+<button class="bg-maroon-50 hover:bg-maroon-100 border border-maroon-700/50 text-maroon-800 font-bold text-xs px-4 py-2.5 rounded-xl inline-flex items-center space-x-2 shadow-sm transition active:scale-95" onclick="document.getElementById('customImageInput').click()" type="button">
+<i class="fa-solid fa-image text-sm text-maroon-700"></i>
+<span>Pilih Foto dari Galeri HP / Komputer</span>
+</button>
+<!-- Wadah Preview Foto Upload -->
+<div class="hidden mt-3 relative rounded-xl overflow-hidden border border-stone-200 bg-stone-50 p-2" id="customUploadPreviewContainer">
+<img alt="Preview Desain Custom" class="max-h-56 mx-auto rounded-lg object-contain shadow-sm" id="customUploadPreviewImg" src=""/>
+<div class="mt-2 flex items-center justify-between px-2 text-[11px]">
+<span class="text-stone-600 font-medium truncate max-w-[200px]" id="customUploadFileName">nama-foto.jpg</span>
+<button class="text-rose-600 font-bold hover:underline flex items-center space-x-1" onclick="clearUploadedCustomImage()" type="button">
+<i class="fa-solid fa-trash-can text-[10px]"></i>
+<span>Hapus Foto</span>
+</button>
+</div>
+</div>
+</div>
+<div>
+<label class="block font-bold text-stone-700 mb-1.5">1. Model Bingkai</label>
+<div class="grid grid-cols-2 gap-2">
+<button class="frame-btn active border-2 border-maroon-700 bg-maroon-50/50 p-2.5 rounded-xl text-left" onclick="selectFrameType('Akrilik 3D Box Transparan', 350000, this)" type="button">
+<p class="font-bold text-stone-900">Akrilik 3D Transparan</p>
+<p class="text-[10px] text-maroon-700 font-semibold">+ Rp 350.000</p>
+</button>
+<button class="frame-btn border border-stone-300 p-2.5 rounded-xl text-left bg-white" onclick="selectFrameType('Rustic Wood Kayu Pinus', 250000, this)" type="button">
+<p class="font-bold text-stone-900">Rustic Wood Kayu</p>
+<p class="text-[10px] text-stone-500 font-semibold">+ Rp 250.000</p>
+</button>
+<button class="frame-btn border border-stone-300 p-2.5 rounded-xl text-left bg-white" onclick="selectFrameType('Rumah Adat / Wayang', 400000, this)" type="button">
+<p class="font-bold text-stone-900">Gunungan / Adat</p>
+<p class="text-[10px] text-stone-500 font-semibold">+ Rp 400.000</p>
+</button>
+<button class="frame-btn border border-stone-300 p-2.5 rounded-xl text-left bg-white" onclick="selectFrameType('Bingkai Putih Ukir Klasik', 200000, this)" type="button">
+<p class="font-bold text-stone-900">Bingkai Putih Ukir</p>
+<p class="text-[10px] text-stone-500 font-semibold">+ Rp 200.000</p>
+</button>
+</div>
+</div>
+<div>
+<label class="block font-bold text-stone-700 mb-1.5">2. Ukuran Bingkai</label>
+<select class="w-full bg-white border border-stone-300 rounded-xl p-2.5 text-xs text-stone-800 focus:outline-none focus:ring-2 focus:ring-maroon-700" id="customSizeSelect" onchange="calculateCustomPrice()">
+<option data-price="950000" value="30x40">Ukuran Sedang (30 x 40 cm)</option>
+<option data-price="1200000" value="35x45">Ukuran Besar (35 x 45 cm)</option>
+<option data-price="1500000" value="40x50">Ukuran Jumbo Stand (40 x 50 cm)</option>
+</select>
+</div>
+<div>
+<label class="block font-bold text-stone-700 mb-1.5">3. Fitur Tambahan</label>
+<div class="space-y-2">
+<label class="flex items-center justify-between p-2.5 bg-white border border-stone-200 rounded-xl cursor-pointer">
+<div class="flex items-center space-x-2">
+<input class="rounded text-maroon-700 w-4 h-4" id="checkLED" onchange="calculateCustomPrice()" type="checkbox"/>
+<span>Instalasi Lampu LED Warm Glow</span>
+</div>
+<span class="font-bold text-stone-700">+ Rp 100.000</span>
+</label>
+<label class="flex items-center justify-between p-2.5 bg-white border border-stone-200 rounded-xl cursor-pointer">
+<div class="flex items-center space-x-2">
+<input class="rounded text-maroon-700 w-4 h-4" id="checkStand" onchange="calculateCustomPrice()" type="checkbox"/>
+<span>Standing Tripod Kayu Penyangga</span>
+</div>
+<span class="font-bold text-stone-700">+ Rp 85.000</span>
+</label>
+</div>
+</div>
+<div class="bg-gradient-to-r from-maroon-900 to-maroon-800 text-white p-4 rounded-2xl shadow border border-gold-400/40">
+<div class="flex justify-between items-center mb-1">
+<span class="text-xs text-stone-300">Estimasi Total Harga Custom:</span>
+<span class="font-serif font-bold text-lg text-gold-400" id="customTotalDisplay">Rp 1.300.000</span>
+</div>
+<p class="text-[10px] text-stone-300 mb-3">*Termasuk packing kayu ekspedisi &amp; replika aman.</p>
+<button class="w-full bg-gradient-to-r from-gold-400 to-gold-500 text-maroon-900 font-bold py-2.5 rounded-xl shadow active:scale-95 transition" onclick="applyCustomToCheckout()">
+            Lanjut Isi Formulir Pemesanan
+          </button>
+</div>
+</div>
+</main>
+<!-- PAGE 3: FORM PESANAN ONLINE & PEMBAYARAN -->
+<main class="page-view hidden flex-1 flex flex-col p-4 space-y-4" id="tab-bayar">
+<div class="border-b border-stone-200 pb-3">
+<span class="text-[10px] font-bold uppercase tracking-wider text-maroon-700">Formulir Pesanan Online</span>
+<h2 class="font-serif text-xl font-bold text-stone-900">Data Pengantin &amp; Pembayaran</h2>
+<p class="text-xs text-stone-500">Tuliskan nama kedua mempelai dan deskripsi request khusus Anda.</p>
+</div>
+<!-- Preview Produk & Foto Yang Dipilih -->
+<div class="bg-amber-50 border border-amber-200 rounded-2xl p-3 flex items-center space-x-3">
+<div class="w-16 h-16 rounded-xl overflow-hidden bg-stone-100 flex-shrink-0 border border-amber-300/60">
+<img alt="Thumbnail Produk" class="w-full h-full object-cover" id="orderProductThumb" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrEUU54URwRvEFAcgYu_hhZ1FX3DQzHuRFC3JPX38P_UYb50a3kx_V_7mBHJRmb86aEZOOeSD6mjWQzmMAg54Bk7QdiMKjhkDDfiPchLCN6ivEJn7greeDuYrZNtrPmZILO9H-7ZYAGzNrbdb5TFjIxukTeIiKuF58OJlWCOXGqI0ivoER4MckTyhfzN77bnTFriL0N4lwvehf9AGtHyuSTx-g-n1w5aNpyqgtu554JlOuf7Ng87g"/>
+</div>
+<div class="flex-1 min-w-0">
+<span class="text-[10px] font-bold text-amber-900 uppercase tracking-wider">Desain Terpilih:</span>
+<h4 class="font-serif font-bold text-stone-900 text-sm truncate" id="orderProductName">Mahar Kubah Lengkung Mawar Marun</h4>
+<p class="text-xs font-bold text-maroon-700" id="orderProductPrice">Rp 750.000</p>
+</div>
+<button class="text-[11px] text-maroon-700 font-bold underline flex-shrink-0" onclick="switchTab('tab-katalog')">Ubah</button>
+</div>
+<form class="space-y-3 text-xs" id="orderForm" onsubmit="handlePaymentSubmit(event)">
+<!-- Input Nama Mempelai yang Dicantumkan di Mahar -->
+<div>
+<label class="block font-bold text-stone-700 mb-1">Nama Kedua Mempelai yang Dicantumkan di Mahar *</label>
+<input class="w-full bg-white border border-stone-300 rounded-xl p-2.5 text-stone-800 focus:outline-none focus:ring-2 focus:ring-maroon-700" id="groomBrideName" placeholder="Contoh: Rian &amp; Amanda" required="" type="text"/>
+<p class="text-[10px] text-stone-500 mt-1">Nama ini yang akan diukir timbul / kaligrafi pada mahar pernikahan Anda.</p>
+</div>
+<!-- Kolom Deskripsi Tambahan / Request Tulisan Khusus -->
+<div>
+<label class="block font-bold text-stone-700 mb-1">Deskripsi Tambahan / Request Tulisan Khusus</label>
+<textarea class="w-full bg-white border border-stone-300 rounded-xl p-2.5 text-stone-800 focus:outline-none focus:ring-2 focus:ring-maroon-700" id="orderSpecialNotes" placeholder="Contoh: Cantumkan tanggal akad 12 Desember 2026, request tulisan arab Bismillah, minta tambahan warna bunga putih..." rows="3"></textarea>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<div>
+<label class="block font-bold text-stone-700 mb-1">Nomor WhatsApp Aktif *</label>
+<input class="w-full bg-white border border-stone-300 rounded-xl p-2.5 text-stone-800 focus:outline-none focus:ring-2 focus:ring-maroon-700" id="clientPhone" placeholder="08xxxxxxxxxx" required="" type="tel" value="081234567890"/>
+</div>
+<div>
+<label class="block font-bold text-stone-700 mb-1">Tanggal Akad (Deadline) *</label>
+<input class="w-full bg-white border border-stone-300 rounded-xl p-2.5 text-stone-800 focus:outline-none focus:ring-2 focus:ring-maroon-700" id="orderDeadline" required="" type="date" value="2026-11-20"/>
+</div>
+</div>
+<div>
+<label class="block font-bold text-stone-700 mb-1">Rincian Nominal Mahar yang Ditulis</label>
+<input class="w-full bg-white border border-stone-300 rounded-xl p-2.5 text-stone-800 focus:outline-none focus:ring-2 focus:ring-maroon-700" id="maharNominalText" type="text" value="Uang Kertas Rp 1.000.000 &amp; Emas 2 Gram"/>
+</div>
+<div class="pt-2">
+<label class="block font-bold text-stone-700 mb-1.5">Pilihan Metode Pembayaran Online</label>
+<div class="space-y-2">
+<label class="flex items-center justify-between p-3 bg-white border-2 border-maroon-700 rounded-xl cursor-pointer">
+<div class="flex items-center space-x-2.5">
+<input checked="" class="text-maroon-700" name="payMethod" type="radio" value="QRIS"/>
+<div>
+<p class="font-bold text-stone-900">QRIS Instan (BCA, Mandiri, GoPay, Dana)</p>
+<p class="text-[10px] text-stone-500">Verifikasi otomatis &amp; kode QR langsung muncul</p>
+</div>
+</div>
+<i class="fa-solid fa-qrcode text-lg text-maroon-700"></i>
+</label>
+<label class="flex items-center justify-between p-3 bg-white border border-stone-200 rounded-xl cursor-pointer">
+<div class="flex items-center space-x-2.5">
+<input class="text-maroon-700" name="payMethod" type="radio" value="Transfer Bank BCA"/>
+<div>
+<p class="font-bold text-stone-900">Transfer Bank Mandiri / BCA</p>
+<p class="text-[10px] text-stone-500">Rekening Resmi Atelier Odhy Mahar</p>
+</div>
+</div>
+<i class="fa-solid fa-building-columns text-stone-400"></i>
+</label>
+</div>
+</div>
+<div class="bg-white border border-stone-200 rounded-2xl p-3.5 space-y-1.5">
+<div class="flex justify-between text-stone-600">
+<span>Harga Desain Mahar:</span>
+<span id="summaryBasePrice">Rp 750.000</span>
+</div>
+<div class="border-t border-dashed border-stone-200 pt-2 flex justify-between font-bold text-sm text-stone-900">
+<span>Total Tagihan:</span>
+<span class="text-maroon-700" id="summaryFinalPrice">Rp 750.000</span>
+</div>
+</div>
+<div class="space-y-2 pt-2">
+<button class="w-full bg-gradient-to-r from-maroon-800 to-maroon-700 hover:from-maroon-900 text-gold-100 font-bold py-3 rounded-xl shadow-lg transition active:scale-98 flex items-center justify-center space-x-2 text-xs" type="submit">
+<i class="fa-solid fa-lock"></i>
+<span>Konfirmasi &amp; Bayar Sekarang</span>
+</button>
+<button class="w-full bg-stone-100 hover:bg-stone-200 text-stone-600 font-semibold py-2.5 rounded-xl transition text-xs" onclick="cancelOrderProcess()" type="button">
+            Kembali ke Katalog
+          </button>
+</div>
+</form>
+</main>
+<!-- PAGE 4: INVOICE & DASHBOARD PEMILIK -->
+<main class="page-view hidden flex-1 flex flex-col p-4 space-y-4" id="tab-admin">
+<div class="flex bg-stone-200 p-1 rounded-xl text-xs font-bold">
+<button class="flex-1 py-1.5 rounded-lg bg-white text-stone-900 shadow-sm transition" id="subtab-inv-btn" onclick="switchAdminSubtab('invoice')">
+<i class="fa-solid fa-receipt mr-1"></i> E-Invoice Digital
+        </button>
+<button class="flex-1 py-1.5 rounded-lg text-stone-600 flex items-center justify-center space-x-1 transition" id="subtab-dash-btn" onclick="requestAdminDashboardAccess()">
+<i class="fa-solid fa-lock text-[10px] text-maroon-700" id="dashLockIcon"></i>
+<span>Dashboard Pemilik</span>
+</button>
+</div>
+<!-- INVOICE & LIVE TRACKING (Untuk Pelanggan & Pemesan) -->
+<div class="space-y-4 text-xs" id="subview-invoice">
+<div class="bg-white border border-stone-200 rounded-2xl p-4 shadow-sm relative overflow-hidden">
+<div class="absolute top-0 right-0 bg-emerald-600 text-white font-bold text-[10px] px-3 py-1 rounded-bl-xl uppercase tracking-wider">
+            LUNAS / VALID
+          </div>
+<div class="mb-3">
+<span class="text-[10px] text-gold-600 font-bold uppercase tracking-widest">Odhy Mahar Official</span>
+<h3 class="font-serif font-bold text-base text-stone-900">E-Invoice Digital</h3>
+<p class="text-[10px] text-stone-500">No. Tagihan: <span class="font-mono font-bold text-stone-700" id="invNumber">INV-ODM-202611-089</span></p>
+</div>
+<div class="border-y border-stone-100 py-2.5 my-2.5 space-y-1.5 text-[11px]">
+<div class="flex justify-between">
+<span class="text-stone-500">Nama di Mahar:</span>
+<span class="font-bold text-stone-800" id="invBride">Rian &amp; Amanda</span>
+</div>
+<div class="flex justify-between">
+<span class="text-stone-500">Model Mahar:</span>
+<span class="font-bold text-stone-800" id="invProduct">Mahar Kubah Lengkung Mawar Marun</span>
+</div>
+<div class="flex justify-between">
+<span class="text-stone-500">Catatan/Request:</span>
+<span class="font-medium text-stone-800 italic text-right max-w-[60%] truncate" id="invNotes">Sesuai Form Pemesanan</span>
+</div>
+<div class="flex justify-between">
+<span class="text-stone-500">Target Akad:</span>
+<span class="font-bold text-stone-800" id="invDeadline">20 November 2026</span>
+</div>
+</div>
+<div class="flex justify-between items-center pt-1 font-bold">
+<span class="text-stone-700">Total Dibayar:</span>
+<span class="font-serif text-sm text-maroon-700" id="invPrice">Rp 750.000</span>
+</div>
+</div>
+<div class="bg-white border border-stone-200 rounded-2xl p-4 shadow-sm">
+<h4 class="font-bold text-stone-800 text-xs mb-3 flex items-center space-x-2">
+<i class="fa-solid fa-clock-rotate-left text-maroon-700"></i>
+<span>Status Pengerjaan Mahar (Live Tracking)</span>
+</h4>
+<div class="space-y-3.5 relative pl-4 border-l-2 border-stone-200 ml-2">
+<div class="relative">
+<span class="absolute -left-[23px] top-0.5 w-3.5 h-3.5 rounded-full bg-emerald-600 ring-4 ring-emerald-100 flex items-center justify-center text-white text-[8px]">
+<i class="fa-solid fa-check"></i>
+</span>
+<p class="font-bold text-stone-900 text-xs leading-none">Pesanan &amp; Pembayaran Tervalidasi</p>
+<p class="text-[10px] text-stone-500">Sistem memvalidasi rincian &amp; request nama telah tercatat.</p>
+</div>
+<div class="relative">
+<span class="absolute -left-[23px] top-0.5 w-3.5 h-3.5 rounded-full bg-maroon-700 ring-4 ring-maroon-100 animate-pulse"></span>
+<p class="font-bold text-maroon-700 text-xs leading-none">Proses Rangkai &amp; Kaligrafi Woodcraft</p>
+<p class="text-[10px] text-stone-500">Sedang dikerjakan oleh artisan Odhy Mahar.</p>
+</div>
+</div>
+</div>
+<!-- Tombol Buka WhatsApp -->
+<a class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl flex items-center justify-center space-x-2 text-xs shadow" href="https://wa.me/6281234567890?text=Halo%20Odhy%20Mahar,%20saya%20sudah%20memesan%20mahar" id="btnWAConfirmation" target="_blank">
+<i class="fa-brands fa-whatsapp text-sm"></i>
+<span>Hubungi Admin Atelier via WhatsApp</span>
+</a>
+</div>
+<!-- DASHBOARD PEMILIK / ADMIN (DIPROTEKSI PASSWORD admin123) -->
+<div class="hidden space-y-4 text-xs" id="subview-dashboard">
+<div class="bg-gradient-to-r from-maroon-800 to-maroon-900 text-white p-3.5 rounded-2xl flex items-center justify-between shadow border border-gold-400/30">
+<div class="flex items-center space-x-2.5">
+<div class="w-8 h-8 rounded-full bg-gold-400/20 text-gold-400 flex items-center justify-center border border-gold-400/40">
+<i class="fa-solid fa-user-check text-xs"></i>
+</div>
+<div>
+<p class="font-bold text-xs">Admin Terautentikasi</p>
+<p class="text-[10px] text-gold-300">Hak Akses Penuh Pemilik</p>
+</div>
+</div>
+<button class="bg-maroon-950/80 hover:bg-maroon-900 text-gold-200 border border-gold-400/30 px-3 py-1.5 rounded-xl text-[10px] font-bold flex items-center space-x-1.5 transition" onclick="adminLogout()">
+<i class="fa-solid fa-arrow-right-from-bracket"></i>
+<span>Logout</span>
+</button>
+</div>
+<!-- Metrik Omzet & Pesanan -->
+<div class="grid grid-cols-2 gap-2">
+<div class="bg-white p-3.5 rounded-2xl border border-stone-200 shadow-sm">
+<div class="flex items-center justify-between mb-1">
+<span class="text-[10px] text-stone-500 font-semibold">Pesanan Masuk</span>
+<span class="text-[9px] bg-blue-50 text-blue-700 px-1.5 py-0.5 rounded font-bold">Bulan Ini</span>
+</div>
+<p class="font-serif font-bold text-xl text-stone-900">28 Pesanan</p>
+<p class="text-[10px] text-emerald-600 mt-1 font-medium"><i class="fa-solid fa-arrow-trend-up mr-0.5"></i> +14% meningkat</p>
+</div>
+<div class="bg-white p-3.5 rounded-2xl border border-stone-200 shadow-sm">
+<div class="flex items-center justify-between mb-1">
+<span class="text-[10px] text-stone-500 font-semibold">Omzet Tervalidasi</span>
+<span class="text-[9px] bg-emerald-50 text-emerald-700 px-1.5 py-0.5 rounded font-bold">Lunas</span>
+</div>
+<p class="font-serif font-bold text-xl text-maroon-700">Rp 31.400.000</p>
+<p class="text-[10px] text-stone-400 mt-1 font-medium">BCA &amp; Mandiri QRIS</p>
+</div>
+</div>
+<!-- Kontrol Stok Bahan & Peringatan Restock -->
+<div class="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm space-y-3">
+<div class="flex items-center justify-between">
+<h4 class="font-bold text-stone-800 text-xs flex items-center space-x-1.5">
+<i class="fa-solid fa-boxes-stacked text-maroon-700"></i>
+<span>Monitoring Stok Bahan &amp; Restock</span>
+</h4>
+<span class="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full">Sistem Aktif</span>
+</div>
+<div class="space-y-2">
+<div class="p-2.5 bg-stone-50 rounded-xl flex items-center justify-between border border-stone-200">
+<div>
+<p class="font-bold text-stone-800 text-xs">Akrilik 3D Box (30x40 &amp; 35x45)</p>
+<p class="text-[10px] text-stone-500">Tersisa 19 unit bingkai</p>
+</div>
+<span class="bg-emerald-50 text-emerald-700 font-bold text-[10px] px-2 py-1 rounded-lg">Aman</span>
+</div>
+<div class="p-2.5 bg-amber-50 rounded-xl flex items-center justify-between border border-amber-200">
+<div>
+<p class="font-bold text-amber-900 text-xs">Replika Koin Logam Mulia</p>
+<p class="text-[10px] text-amber-700 font-semibold">Tersisa 3 set (Mendekati Minimum!)</p>
+</div>
+<button class="bg-amber-600 hover:bg-amber-700 text-white font-bold text-[10px] px-2.5 py-1 rounded-lg shadow-sm" onclick="alert('Notifikasi Pesanan Restock Bahan Logam Mulia dikirim ke supplier!')">
+                Restock
+              </button>
+</div>
+</div>
+</div>
+<!-- Update Status Pengerjaan Mahar Pesanan Terakhir -->
+<div class="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm space-y-2.5">
+<h4 class="font-bold text-stone-800 text-xs flex items-center space-x-1.5">
+<i class="fa-solid fa-sliders text-maroon-700"></i>
+<span>Update Status Pengerjaan (Database)</span>
+</h4>
+<p class="text-[11px] text-stone-500">Ubah progress pengerjaan untuk pesanan <strong id="adminTargetOrder">INV-ODM-202611-089</strong>:</p>
+<div class="grid grid-cols-2 gap-2 pt-1">
+<button class="p-2 rounded-xl border border-maroon-700 bg-maroon-50 text-maroon-800 font-bold text-[11px] text-left" onclick="updateWorkflowStatus('Dirangkai Woodcraft')">
+              1. Rangkai Woodcraft
+            </button>
+<button class="p-2 rounded-xl border border-stone-200 bg-white hover:bg-stone-50 text-stone-700 font-medium text-[11px] text-left" onclick="updateWorkflowStatus('Finishing &amp; Packing Kayu')">
+              2. Packing Kayu
+            </button>
+<button class="p-2 rounded-xl border border-stone-200 bg-white hover:bg-stone-50 text-stone-700 font-medium text-[11px] text-left col-span-2" onclick="updateWorkflowStatus('Siap Diambil / Dikirim Ekspedisi')">
+              3. Siap Diambil / Ekspedisi
+            </button>
+</div>
+</div>
+</div>
+</main>
+<!-- MODAL POPUP LOGIN PASSWORD ADMIN (PROTEKSI admin123) -->
+<div class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4" id="adminAuthModal">
+<div class="bg-white rounded-3xl w-full max-w-sm p-6 shadow-2xl border border-stone-200 transform transition-all">
+<div class="text-center mb-5">
+<div class="w-14 h-14 bg-gradient-to-tr from-maroon-800 to-maroon-600 text-gold-400 rounded-2xl mx-auto flex items-center justify-center text-2xl shadow-lg mb-3">
+<i class="fa-solid fa-lock"></i>
+</div>
+<h3 class="font-serif font-bold text-stone-900 text-lg">Area Khusus Pemilik</h3>
+<p class="text-xs text-stone-500 mt-1">Masukkan PIN / Kata Sandi Admin untuk membuka Dashboard Manajemen Odhy Mahar.</p>
+</div>
+<form class="space-y-4" id="adminLoginForm" onsubmit="verifyAdminPassword(event)">
+<div>
+<label class="block text-xs font-bold text-stone-700 mb-1.5">Kata Sandi / PIN Admin</label>
+<div class="relative">
+<input class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3.5 py-3 text-sm text-stone-900 focus:outline-none focus:ring-2 focus:ring-maroon-700" id="adminPasswordInput" placeholder="Masukkan sandi..." required="" type="password"/>
+<button class="absolute right-3.5 top-3.5 text-stone-400 hover:text-stone-600" onclick="togglePasswordVisibility()" type="button">
+<i class="fa-regular fa-eye" id="pwdEyeIcon"></i>
+</button>
+</div>
+<p class="text-[11px] text-rose-600 font-semibold mt-1.5 hidden flex items-center space-x-1" id="adminAuthError">
+<i class="fa-solid fa-circle-exclamation mr-1"></i> Sandi salah! Hanya pemilik yang berhak akses.
+            </p>
+<p class="text-[10px] text-stone-400 mt-2 bg-stone-100 p-2 rounded-lg">
+<span class="font-bold text-stone-600">PIN Bawaan Toko:</span> <code class="font-mono font-bold text-maroon-700">admin123</code>.
+            </p>
+</div>
+<div class="space-y-2 pt-1">
+<button class="w-full bg-gradient-to-r from-maroon-800 to-maroon-700 hover:from-maroon-900 text-gold-100 font-bold py-3 rounded-xl shadow text-xs transition active:scale-98 flex items-center justify-center space-x-2" type="submit">
+<i class="fa-solid fa-unlock-keyhole"></i>
+<span>Buka Dashboard Pemilik</span>
+</button>
+<button class="w-full bg-stone-100 hover:bg-stone-200 text-stone-600 font-semibold py-2.5 rounded-xl text-xs transition" onclick="closeAdminAuthModal()" type="button">
+              Batal (Kembali)
+            </button>
+</div>
+</form>
+</div>
+</div>
+<!-- FIXED BOTTOM BAR -->
+<nav class="fixed bottom-0 max-w-md w-full bg-white border-t border-stone-200/90 py-2 px-3 flex justify-around items-center z-40 shadow-[0_-4px_15px_rgba(0,0,0,0.05)]">
+<button class="nav-btn active flex flex-col items-center justify-center flex-1 text-maroon-700 py-1 transition-colors" id="nav-tab-katalog" onclick="switchTab('tab-katalog')">
+<i class="fa-solid fa-shop text-lg mb-1"></i>
+<span class="text-[10px] font-bold tracking-tight">Katalog</span>
+</button>
+<button class="nav-btn flex flex-col items-center justify-center flex-1 text-stone-400 py-1 transition-colors" id="nav-tab-custom" onclick="switchTab('tab-custom')">
+<i class="fa-solid fa-pen-ruler text-lg mb-1"></i>
+<span class="text-[10px] font-medium tracking-tight">Custom</span>
+</button>
+<button class="nav-btn flex flex-col items-center justify-center flex-1 text-stone-400 py-1 transition-colors" id="nav-tab-bayar" onclick="switchTab('tab-bayar')">
+<i class="fa-solid fa-credit-card text-lg mb-1"></i>
+<span class="text-[10px] font-medium tracking-tight">Bayar</span>
+</button>
+<button class="nav-btn flex flex-col items-center justify-center flex-1 text-stone-400 py-1 transition-colors" id="nav-tab-admin" onclick="switchTab('tab-admin')">
+<i class="fa-solid fa-receipt text-lg mb-1"></i>
+<span class="text-[10px] font-medium tracking-tight">Lacak / Admin</span>
+</button>
+</nav>
+</div>
+<!-- JAVASCRIPT LOGIC INTERAKTIF LENGKAP -->
+
+</body></html>
